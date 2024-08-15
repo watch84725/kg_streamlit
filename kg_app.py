@@ -5,8 +5,53 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
+# 设置页面的基本样式
+st.markdown("""
+    <style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f5f5f5;
+    }
+    .main {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+    }
+    h1, h2, h3 {
+        color: #333;
+    }
+    .stButton button {
+        background-color: #2b7fb8;
+        color: white;
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-size: 16px;
+    }
+    .stButton button:hover {
+        background-color: #f8af23;
+        color: white;
+    }
+    .chart {
+        margin-bottom: 40px;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 # 显示大标题并置中
-st.markdown("<h1 style='text-align: center;'>第一屆康健增重大賽🍰</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; margin-bottom: 10px;'>第一屆康健增重大賽🍰</h1>", unsafe_allow_html=True)
+
+# 在右上角添加超链接，并进行美化
+st.markdown(
+    """
+    <div style="text-align: right; padding: 10px;">
+        <a href="https://docs.google.com/spreadsheets/d/1AOjn9rvcHUeusWOmQ5xLspPa9thchQu4BCLtO-rDqz8/edit?gid=0#gid=0" target="_blank" 
+        style="text-decoration: none; font-size: 18px; color: #2b7fb8; font-weight: bold; background-color: #e0f7fa; padding: 10px; border-radius: 10px;">
+            體重紀錄表 📊
+        </a>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 # 从 Streamlit Secrets 中获取 Google Sheets API 凭证
 creds_dict = st.secrets["GCP_SERVICE_ACCOUNT"]
@@ -92,7 +137,7 @@ fig, ax1 = plt.subplots(figsize=(12, 6))
 # 绘制第一个图：双轴图
 ax1.set_xlabel('Date', fontsize=14)  # 设置X轴标签字体大小
 ax1.set_ylabel('Steven Weight (kg)', color='#2b7fb8', fontsize=14)  # 使用提供的色码 #2b7fb8
-ax1.plot(steven_df['Date'], steven_df['Weight'], color='#2b7fb8', label='Steven', linewidth=2.5)  # 设置线条宽度
+ax1.plot(steven_df['Date'], steven_df['Weight'], color='#2b7fb8', label='Steven', linewidth=2.5, marker='o')  # 设置线条宽度
 ax1.tick_params(axis='y', labelcolor='#2b7fb8', labelsize=12)  # 设置Y轴刻度字体大小
 ax1.tick_params(axis='x', labelsize=12)  # 设置X轴刻度字体大小
 
@@ -103,7 +148,7 @@ ax1.set_yticks([i / 10 for i in range(513, 544, 5)])  # 设置刻度间隔为0.5
 # 创建第二个 Y 轴，共享 X 轴，并设置线条宽度
 ax1_right = ax1.twinx()
 ax1_right.set_ylabel('Grace Weight (kg)', color='#f8af23', fontsize=14)  # 使用提供的色码 #f8af23
-ax1_right.plot(grace_df['Date'], grace_df['Weight'], color='#f8af23', label='Grace', linewidth=2.5)  # 设置线条宽度
+ax1_right.plot(grace_df['Date'], grace_df['Weight'], color='#f8af23', label='Grace', linewidth=2.5, marker='o')  # 设置线条宽度
 ax1_right.tick_params(axis='y', labelcolor='#f8af23', labelsize=12)  # 设置第二个Y轴刻度字体大小
 
 # 设置右边 Y 轴范围和刻度间隔
@@ -148,4 +193,4 @@ fig2.autofmt_xdate()
 st.pyplot(fig2)
 
 # 显示当前领先者
-st.markdown(f"<h2 style='text-align: center;'>目前領先者 🥇{leading_participant}</h2>", unsafe_allow_html=True)
+st.markdown(f"<h2 style='text-align: center; color: #2b7fb8;'>目前領先者 🥇{leading_participant}</h2>", unsafe_allow_html=True)
