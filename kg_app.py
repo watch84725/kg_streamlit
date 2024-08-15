@@ -25,10 +25,10 @@ data = sheet.get_all_records()
 col1, col2 = st.columns([1, 1])  # 创建两列布局
 with col1:
     st.markdown("<h3 style='text-align: center;'>選手一 Steven</h3>", unsafe_allow_html=True)
-    st.image("images/Steven.PNG", width=300)  # 使用相对路径
+    st.image("Steven.PNG", width=300)  # 使用相对路径
 with col2:
     st.markdown("<h3 style='text-align: center;'>選手二 Grace</h3>", unsafe_allow_html=True)
-    st.image("images/Yoz.PNG", width=300)  # 使用相对路径
+    st.image("Yoz.PNG", width=300)  # 使用相对路径
 
 # 將數據轉換為 DataFrame
 df = pd.DataFrame(data)
