@@ -2,26 +2,23 @@ import streamlit as st
 import gspread
 from google.oauth2.service_account import Credentials
 import pandas as pd
-import os
-from dotenv import load_dotenv
 
-
-# Google Sheets API 授權
-load_dotenv()
+# 从 Streamlit Secrets 中获取 Google Sheets API 凭证
+creds_dict = st.secrets["GCP_SERVICE_ACCOUNT"]
 
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds = Credentials.from_service_account_file(os.environ.get("GOOGLE_CREDENTIALS_JSON"), scopes=scope)
+creds = Credentials.from_service_account_info(creds_dict, scopes=scope)
 
 client = gspread.authorize(creds)
 
-# # 使用 sheet_id 打開 Google Sheet
+# 使用 sheet_id 打開 Google Sheet
 spreadsheet = client.open_by_key("1AOjn9rvcHUeusWOmQ5xLspPa9thchQu4BCLtO-rDqz8")  # 替換成你的 sheet_id
 sheet = spreadsheet.sheet1  # 選擇第一個工作表
 data = sheet.get_all_records()
 
-# # # 將數據轉換為 DataFrame
+# 將數據轉換為 DataFrame
 df = pd.DataFrame(data)
-print(df)
+st.write(df)
 
 # 将数据从宽表转换为长表（key-value 格式）
 df_melted = df.melt(id_vars=["Name"], var_name="Date", value_name="Weight")
@@ -33,7 +30,7 @@ df_melted["Weight"] = pd.to_numeric(df_melted["Weight"], errors='coerce')
 df_melted = df_melted.dropna(subset=["Weight"])
 
 # 顯示轉置後的結果
-print(df_melted)
+st.write(df_melted)
 
 st.title("Weight Data Visualization")
 
