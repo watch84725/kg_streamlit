@@ -198,8 +198,8 @@ with col2:
     ax3.set_title('Perry Weight')
     
     # 正確設置 y 軸的範圍和刻度
-    ax3.set_ylim(46.8, 50.5)
-    ax3.set_yticks([46.9, 47.4, 47.9, 48.4, 48.9, 49.4, 49.9])
+    ax3.set_ylim(46.7, 50.5)
+    ax3.set_yticks([46.8, 47.3, 47.8, 48.3, 48.8, 49.3, 49.8])
 
     ax3.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
     fig3.autofmt_xdate()
@@ -261,35 +261,35 @@ kg_change_longer_df['Date'] = pd.to_datetime(kg_change_longer_df['Date'], format
 kg_change_longer_df = kg_change_longer_df.dropna(subset=['Date', 'WeightChange'])
 
 # 只保留 Grace 和 Steven 的數據
-kg_change_longer_df_filtered = kg_change_longer_df[kg_change_longer_df['Name'].isin(['Grace', 'Steven'])]
+kg_change_longer_df_filtered = kg_change_longer_df[kg_change_longer_df['Name'].isin(['Grace', 'Steven', 'Perry'])]
 
-# 計算 Perry 與 08/16 的體重變化
-Perry_base_date = '8/16'  # 基準日期
-Perry_base_weights = df[Perry_base_date]  # 08/16 的體重
-# 創建一個新的 DataFrame，計算每一天與 08/16 相比的體重變化
-Perry_df_change = df.copy()
-for col in date_columns:
-    Perry_df_change[col] = df[col] - Perry_base_weights
-# 將數據從寬表轉換為長表（key-value 格式）
-Perry_kg_change_longer_df = Perry_df_change.melt(id_vars=["Name"], var_name="Date", value_name="WeightChange")
-# 清理數據：將日期轉換為 datetime 格式，去除無效數據
-Perry_kg_change_longer_df['Date'] = pd.to_datetime(Perry_kg_change_longer_df['Date'], format="%m/%d", errors='coerce')
-# 刪除 NaN 值
-Perry_kg_change_longer_df = Perry_kg_change_longer_df.dropna(subset=['Date', 'WeightChange'])
-# 只保留 Perry 的數據
-Perry_kg_change_longer_df_filtered = Perry_kg_change_longer_df[Perry_kg_change_longer_df['Name'].isin(['Perry'])]
+# # 計算 Perry 與 08/16 的體重變化
+# Perry_base_date = '8/16'  # 基準日期
+# Perry_base_weights = df[Perry_base_date]  # 08/16 的體重
+# # 創建一個新的 DataFrame，計算每一天與 08/16 相比的體重變化
+# Perry_df_change = df.copy()
+# for col in date_columns:
+#     Perry_df_change[col] = df[col] - Perry_base_weights
+# # 將數據從寬表轉換為長表（key-value 格式）
+# Perry_kg_change_longer_df = Perry_df_change.melt(id_vars=["Name"], var_name="Date", value_name="WeightChange")
+# # 清理數據：將日期轉換為 datetime 格式，去除無效數據
+# Perry_kg_change_longer_df['Date'] = pd.to_datetime(Perry_kg_change_longer_df['Date'], format="%m/%d", errors='coerce')
+# # 刪除 NaN 值
+# Perry_kg_change_longer_df = Perry_kg_change_longer_df.dropna(subset=['Date', 'WeightChange'])
+# # 只保留 Perry 的數據
+# Perry_kg_change_longer_df_filtered = Perry_kg_change_longer_df[Perry_kg_change_longer_df['Name'].isin(['Perry'])]
 
-# 使用 concat 將兩個 DataFrame 進行 union
-result = pd.concat([kg_change_longer_df_filtered, Perry_kg_change_longer_df_filtered])
+# # 使用 concat 將兩個 DataFrame 進行 union
+# result = pd.concat([kg_change_longer_df_filtered, Perry_kg_change_longer_df_filtered])
 
-# 重新設置索引（可選），如果你不需要原索引值，可以用 ignore_index=True
-result.reset_index(drop=True, inplace=True)
+# # 重新設置索引（可選），如果你不需要原索引值，可以用 ignore_index=True
+# result.reset_index(drop=True, inplace=True)
 
 # 找到最新的日期
-latest_date = result['Date'].max()
+latest_date = kg_change_longer_df_filtered['Date'].max()
 
 # 過濾出最新日期的數據
-latest_data = result[result['Date'] == latest_date]
+latest_data = kg_change_longer_df_filtered[kg_change_longer_df_filtered['Date'] == latest_date]
 # 判斷誰增重更多
 leading_participant = latest_data.loc[latest_data['WeightChange'].idxmax(), 'Name']
 
@@ -308,8 +308,8 @@ ax2.plot(kg_change_longer_df_filtered[kg_change_longer_df_filtered['Name'] == 'S
 ax2.plot(kg_change_longer_df_filtered[kg_change_longer_df_filtered['Name'] == 'Grace']['Date'], 
          kg_change_longer_df_filtered[kg_change_longer_df_filtered['Name'] == 'Grace']['WeightChange'], color='#f8af23', label='Grace')
 
-ax2.plot(Perry_kg_change_longer_df_filtered[Perry_kg_change_longer_df_filtered['Name'] == 'Perry']['Date'], 
-         Perry_kg_change_longer_df_filtered[Perry_kg_change_longer_df_filtered['Name'] == 'Perry']['WeightChange'], color='#a4586aff', label='Perry')
+ax2.plot(kg_change_longer_df_filtered[kg_change_longer_df_filtered['Name'] == 'Perry']['Date'], 
+         kg_change_longer_df_filtered[kg_change_longer_df_filtered['Name'] == 'Perry']['WeightChange'], color='#a4586aff', label='Perry')
 
 
 ax2.set_xlabel('Date', fontsize=14)
