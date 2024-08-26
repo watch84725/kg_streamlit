@@ -315,7 +315,7 @@ ax2.plot(kg_change_longer_df_filtered[kg_change_longer_df_filtered['Name'] == 'P
 ax2.set_xlabel('Date', fontsize=14)
 ax2.set_ylabel('Weight Change (kg)', fontsize=14)
 ax2.set_title('Weight Leaderboard', fontsize=16)
-ax2.legend(title='Name')
+ax2.legend(title='Name', loc='upper left')  # Move the legend to the upper left corner
 
 # 設置日期格式為 MM/DD
 ax2.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
