@@ -262,7 +262,7 @@ kg_change_longer_df = kg_change_longer_df.dropna(subset=['Date', 'WeightChange']
 
 # 只保留 Grace 和 Steven 的數據
 kg_change_longer_df_filtered = kg_change_longer_df[kg_change_longer_df['Name'].isin(['Grace', 'Steven', 'Perry'])]
-
+kg_change_longer_df_Alan = kg_change_longer_df[kg_change_longer_df['Name'].isin(['Alan'])]
 # # 計算 Perry 與 08/16 的體重變化
 # Perry_base_date = '8/16'  # 基準日期
 # Perry_base_weights = df[Perry_base_date]  # 08/16 的體重
@@ -311,6 +311,8 @@ ax2.plot(kg_change_longer_df_filtered[kg_change_longer_df_filtered['Name'] == 'G
 ax2.plot(kg_change_longer_df_filtered[kg_change_longer_df_filtered['Name'] == 'Perry']['Date'], 
          kg_change_longer_df_filtered[kg_change_longer_df_filtered['Name'] == 'Perry']['WeightChange'], color='#a4586aff', label='Perry')
 
+ax2.plot(kg_change_longer_df_Alan[kg_change_longer_df_Alan['Name'] == 'Alan']['Date'], 
+         kg_change_longer_df_Alan[kg_change_longer_df_Alan['Name'] == 'Alan']['WeightChange'], color='#53592dff', label='Alan')
 
 ax2.set_xlabel('Date', fontsize=14)
 ax2.set_ylabel('Weight Change (kg)', fontsize=14)
