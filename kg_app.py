@@ -160,8 +160,8 @@ with col2:
     ax2.set_title('Grace Weight')
     
     # 正確設置 y 軸的範圍和刻度
-    ax2.set_ylim(43.7, 46.9)
-    ax2.set_yticks([43.8, 44.3, 44.8, 45.3, 45.8, 46.3, 46.8])
+    ax2.set_ylim(43.5, 46.7)
+    ax2.set_yticks([43.6, 44.1, 44.6, 45.1, 45.6, 46.1, 46.6])
 
     ax2.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
     fig2.autofmt_xdate()
