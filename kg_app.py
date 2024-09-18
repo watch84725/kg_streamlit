@@ -236,8 +236,8 @@ with col2:
     ax4.set_title('Alan Weight')
     
     # 正確設置 y 軸的範圍和刻度
-    ax4.set_ylim(70.3, 72.7)
-    ax4.set_yticks([70.6, 71.1, 71.6, 72.1, 72.6, 73.1, 72.6])
+    ax4.set_ylim(70.3, 73.7)
+    ax4.set_yticks([70.6, 71.1, 71.6, 72.1, 72.6, 73.1, 73.6])
 
     ax4.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
     fig4.autofmt_xdate()
