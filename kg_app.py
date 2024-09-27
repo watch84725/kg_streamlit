@@ -122,8 +122,8 @@ with col2:
     ax1.set_title('Steven Weight')
     
     # 正確設置 y 軸的範圍和刻度
-    ax1.set_ylim(51.2, 54.4)
-    ax1.set_yticks([51.3, 51.8, 52.3, 52.8, 53.3, 53.8, 54.3])
+    # ax1.set_ylim(51.2, 54.4)
+    # ax1.set_yticks([51.3, 51.8, 52.3, 52.8, 53.3, 53.8, 54.3])
 
     ax1.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
     fig1.autofmt_xdate()
@@ -160,8 +160,8 @@ with col2:
     ax2.set_title('Grace Weight')
     
     # 正確設置 y 軸的範圍和刻度
-    ax2.set_ylim(43.5, 46.7)
-    ax2.set_yticks([43.6, 44.1, 44.6, 45.1, 45.6, 46.1, 46.6])
+    # ax2.set_ylim(43.5, 46.7)
+    # ax2.set_yticks([43.6, 44.1, 44.6, 45.1, 45.6, 46.1, 46.6])
 
     ax2.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
     fig2.autofmt_xdate()
@@ -198,8 +198,8 @@ with col2:
     ax3.set_title('Perry Weight')
     
     # 正確設置 y 軸的範圍和刻度
-    ax3.set_ylim(46.7, 50.5)
-    ax3.set_yticks([46.8, 47.3, 47.8, 48.3, 48.8, 49.3, 49.8])
+    # ax3.set_ylim(46.7, 50.5)
+    # ax3.set_yticks([46.8, 47.3, 47.8, 48.3, 48.8, 49.3, 49.8])
 
     ax3.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
     fig3.autofmt_xdate()
@@ -236,8 +236,8 @@ with col2:
     ax4.set_title('Alan Weight')
     
     # 正確設置 y 軸的範圍和刻度
-    ax4.set_ylim(70.3, 73.7)
-    ax4.set_yticks([70.6, 71.1, 71.6, 72.1, 72.6, 73.1, 73.6])
+    # ax4.set_ylim(70.3, 73.7)
+    # ax4.set_yticks([70.6, 71.1, 71.6, 72.1, 72.6, 73.1, 73.6])
 
     ax4.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
     fig4.autofmt_xdate()
